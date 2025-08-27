@@ -1,0 +1,21 @@
+/* src/components/Filtros.css */
+.area-filtros {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* Para que sea responsivo en pantallas pequeñas */
+}
+
+.filtro-busqueda, .filtro-select {
+  padding: 0.75rem;
+  border: 1px solid #444;
+  background-color: #2c2c3a;
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.filtro-busqueda {
+  width: 300px;
+}
