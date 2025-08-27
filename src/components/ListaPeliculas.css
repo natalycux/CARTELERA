@@ -1,0 +1,16 @@
+/* src/components/ListaPeliculas.css */
+
+.lista-peliculas {
+  display: grid;
+  /* Crea columnas flexibles. Se ajustarán entre 250px y 1fr (lo que quepa) */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.sin-resultados {
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 3rem;
+}

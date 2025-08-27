@@ -40,3 +40,31 @@
 .read-the-docs {
   color: #888;
 }
+
+
+/* src/App.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1e1e2a;
+  color: #f0f0f0;
+  margin: 0;
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.App h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #5dadec;
+  margin-bottom: 2rem;
+}
+
+.cargando-texto {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 3rem;
+}

@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx (versión actualizada)
+
+import { useState, useEffect } from 'react';
+import ListaPeliculas from './components/ListaPeliculas'; // Importamos el componente
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [peliculas, setPeliculas] = useState([]);
+  const [estaCargando, setEstaCargando] = useState(true);
+
+  useEffect(() => {
+    const obtenerPeliculas = async () => {
+      try {
+        const url = "https://movie.azurewebsites.net/api/cartelera?title=&ubication=";
+        const respuesta = await fetch(url);
+        const data = await respuesta.json();
+        // Limpieza de datos: A veces la API trae duplicados, los filtramos por imdbID
+        const peliculasUnicas = data.filter((pelicula, index, self) =>
+            index === self.findIndex((p) => (
+                p.imdbID === pelicula.imdbID
+            ))
+        );
+        setPeliculas(peliculasUnicas);
+      } catch (error) {
+        console.error("Hubo un error al obtener las películas:", error);
+      } finally {
+        setEstaCargando(false);
+      }
+    };
+    obtenerPeliculas();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      {/* Aquí podrías poner el componente Header */}
+      <h1>Mi Cartelera de Cine</h1>
+      {/* Aquí irá el componente de Filtros */}
+
+      {estaCargando ? (
+        <p className="cargando-texto">Cargando películas...</p>
+      ) : (
+        // Pasamos la lista de películas al componente hijo
+        <ListaPeliculas peliculas={peliculas} />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
