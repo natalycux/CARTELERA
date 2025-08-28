@@ -1,0 +1,31 @@
+/* src/components/Carrusel.css */
+
+.carrusel-container {
+  /* La visibilidad y opacidad se controlarán desde App.jsx para la animación */
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out, max-height 0.6s ease-in-out;
+  overflow: hidden;
+  max-height: 500px; /* Altura inicial */
+}
+
+/* Clases que añadiremos/quitaremos con React */
+.carrusel-container.oculto {
+  opacity: 0;
+  max-height: 0; /* La clave para que se colapse */
+  transform: translateY(-20px);
+}
+
+.carrusel-imagen {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Opcional: para mejorar los puntos de navegación de react-slick */
+.slick-dots li button:before {
+  font-size: 12px;
+  color: white;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #ffc107;
+}

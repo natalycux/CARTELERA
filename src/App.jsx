@@ -1,50 +1,90 @@
-// src/App.jsx (versión actualizada)
+// src/App.jsx (versión final y mejorada)
 
 import { useState, useEffect } from 'react';
-import ListaPeliculas from './components/ListaPeliculas'; // Importamos el componente
-import './App.css';
 
-// src/App.jsx (versión final)
-import { useState, useEffect } from 'react';
-import ListaPeliculas from './components/ListaPeliculas';
-import Filtros from './components/Filtros'; // Importamos Filtros
+// Importa los nuevos componentes
+import Header from './components/jsx/Header';
+import Carrusel from './components/jsx/Carrusel';
+import Filtros from './components/jsx/Filtros';
+import ListaPeliculas from './components/jsx/ListaPeliculas';
+import Footer from './components/jsx/Footer';
+
+
+
 import './App.css';
 
 function App() {
+  // Estados que ya teníamos
   const [peliculas, setPeliculas] = useState([]);
   const [estaCargando, setEstaCargando] = useState(true);
   const [busqueda, setBusqueda] = useState("");
   const [filtroUbicacion, setFiltroUbicacion] = useState("");
 
-  useEffect(() => { /* ...mismo código que antes... */ }, []);
+  // ¡NUEVO ESTADO para controlar la visibilidad del carrusel!
+  const [mostrarCarrusel, setMostrarCarrusel] = useState(true);
 
-  // Calcular las ubicaciones únicas para el dropdown
+  // ¡NUEVO useEffect para manejar el evento de scroll!
+  useEffect(() => {
+    const handleScroll = () => {
+      // Si el usuario baja más de 50px, oculta el carrusel. Si no, lo muestra.
+      if (window.scrollY > 50) {
+        setMostrarCarrusel(false);
+      } else {
+        setMostrarCarrusel(true);
+      }
+    };
+
+    // Añadimos el "escuchador" de eventos de scroll
+    window.addEventListener('scroll', handleScroll);
+
+    // ¡Importante! Limpiamos el "escuchador" cuando el componente se "desmonta"
+    // para evitar problemas de memoria.
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); // El array vacío asegura que esto se configure solo una vez
+
+  // El useEffect para obtener las películas se mantiene igual...
+  useEffect(() => {
+    // ... tu código para fetch de la API ...
+  }, []);
+
+  // El cálculo de películas filtradas y ubicaciones únicas se mantiene igual...
   const ubicacionesUnicas = [...new Set(peliculas.map(p => p.Ubication))];
-
   const peliculasFiltradas = peliculas.filter(pelicula => {
-      const coincideBusqueda = pelicula.Title.toLowerCase().includes(busqueda.toLowerCase());
-      const coincideUbicacion = filtroUbicacion === "" || pelicula.Ubication === filtroUbicacion;
-      return coincideBusqueda && coincideUbicacion;
+    // ... tu lógica de filtrado ...
   });
 
   return (
-    <div className="App">
-      <h1>Mi Cartelera de Cine</h1>
+    // Usamos un Fragment (<>) para no añadir un div innecesario
+    <>
+      <Header />
+      
+      {/* Modificamos el div del carrusel para añadir la clase 'oculto' dinámicamente */}
+      <div className={`carrusel-wrapper ${!mostrarCarrusel ? 'oculto' : ''}`}>
+        <Carrusel />
+      </div>
 
-      <Filtros
-        busqueda={busqueda}
-        setBusqueda={setBusqueda}
-        ubicaciones={ubicacionesUnicas}
-        filtroUbicacion={filtroUbicacion}
-        setFiltroUbicacion={setFiltroUbicacion}
-      />
+      <main className="App">
+        {/* El H1 lo podemos mover a una sección más específica si queremos */}
+        <h2>CARTELERA</h2>
+        <Filtros
+          busqueda={busqueda}
+          setBusqueda={setBusqueda}
+          ubicaciones={ubicacionesUnicas}
+          filtroUbicacion={filtroUbicacion}
+          setFiltroUbicacion={setFiltroUbicacion}
+        />
 
-      {estaCargando ? (
-        <p className="cargando-texto">Cargando películas...</p>
-      ) : (
-        <ListaPeliculas peliculas={peliculasFiltradas} />
-      )}
-    </div>
+        {estaCargando ? (
+          <p className="cargando-texto">Cargando películas...</p>
+        ) : (
+          <ListaPeliculas peliculas={peliculasFiltradas} />
+        )}
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

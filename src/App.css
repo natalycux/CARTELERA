@@ -42,29 +42,35 @@
 }
 
 
-/* src/App.css */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #1e1e2a;
-  color: #f0f0f0;
-  margin: 0;
-}
+/* src/App.css (añadir al final) */
 
+/* El .App ahora es el 'main' de nuestro contenido */
 .App {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
 }
 
-.App h1 {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #5dadec;
-  margin-bottom: 2rem;
-}
-
-.cargando-texto {
+.App h2 {
   text-align: center;
   font-size: 1.5rem;
-  padding: 3rem;
+  color: #5dadec;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #5dadec;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+/* Contenedor para la animación del carrusel */
+.carrusel-wrapper {
+  transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out;
+  max-height: 500px; /* Altura máxima cuando está visible */
+  opacity: 1;
+  overflow: hidden;
+}
+
+.carrusel-wrapper.oculto {
+  max-height: 0; /* Colapsa la altura a 0 */
+  opacity: 0;
 }

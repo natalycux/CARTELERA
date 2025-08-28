@@ -1,7 +1,7 @@
 // src/components/TarjetaPelicula.jsx
 
 import React from 'react';
-import './TarjetaPelicula.css'; // Crearemos este archivo para los estilos
+import '../css/TarjetaPelicula.css'; // Crearemos este archivo para los estilos
 
 // Recibimos la película a través de "props"
 const TarjetaPelicula = ({ pelicula }) => {

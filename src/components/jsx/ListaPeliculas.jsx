@@ -2,7 +2,7 @@
 
 import React from 'react';
 import TarjetaPelicula from './TarjetaPelicula';
-import './ListaPeliculas.css'; // Crearemos este archivo para el grid
+import '../css/ListaPeliculas.css'; // Crearemos este archivo para el grid
 
 const ListaPeliculas = ({ peliculas }) => {
   // Si no hay películas, muestra un mensaje

@@ -1,6 +1,6 @@
 // src/components/Filtros.jsx
 import React from 'react';
-import './Filtros.css';
+import '../css/Filtros.css';
 
 // Recibe los valores actuales y las funciones para cambiarlos desde App.jsx
 const Filtros = ({ busqueda, setBusqueda, ubicaciones, filtroUbicacion, setFiltroUbicacion }) => {
