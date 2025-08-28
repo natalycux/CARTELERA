@@ -1,4 +1,4 @@
-/* src/components/Header.css */
+/* src/components/css/Header.css (Versión completa y corregida) */
 
 .site-header {
   background-color: #0d2146; /* Color azul oscuro de Cinépolis */
@@ -76,4 +76,37 @@
 .social-icons span {
   margin-left: 1rem;
   cursor: pointer;
+}
+
+
+.menu-desplegable {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  /* He completado los estilos que te di antes para este menú */
+  background-color: #1a1a1a;
+  border-top: 1px solid #333;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.menu-desplegable.abierto {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =============================================== */
+/* ESTA ES LA REGLA QUE ARREGLA TU PROBLEMA */
+/* =============================================== */
+.location-selectors select option {
+  color: black;
+  background-color: white;
 }

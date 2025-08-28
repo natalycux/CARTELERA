@@ -1,79 +1,126 @@
-// src/App.jsx (versión final y mejorada)
+// src/App.jsx (versión final consumiendo la API real)
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react'; // Añadimos useMemo
 
-// Importa los nuevos componentes
+// Importa tus componentes (respetando tu estructura de carpetas)
 import Header from './components/jsx/Header';
 import Carrusel from './components/jsx/Carrusel';
-import Filtros from './components/jsx/Filtros';
 import ListaPeliculas from './components/jsx/ListaPeliculas';
 import Footer from './components/jsx/Footer';
-
-
+// NOTA: He cambiado el nombre de 'Filtros' a 'BarraBusqueda' para más claridad
+import BarraBusqueda from './components/jsx/BarraBusqueda'; 
 
 import './App.css';
 
+// Nuestro "traductor" para limpiar los nombres de los cines
+const mapaDeCines = {
+  "POPCINEMA": "Popcinema",
+  "0AKLAND MALL": "Oakland Mall",
+  "OKLAN": "Oakland Mall",
+  "PORTALES": "Portales",
+  "GUASTATOYA": "Guastatoya",
+  "MIRAFLORES": "Miraflores"
+};
+
+
 function App() {
-  // Estados que ya teníamos
+  // --- ESTADOS ---
   const [peliculas, setPeliculas] = useState([]);
   const [estaCargando, setEstaCargando] = useState(true);
-  const [busqueda, setBusqueda] = useState("");
-  const [filtroUbicacion, setFiltroUbicacion] = useState("");
-
-  // ¡NUEVO ESTADO para controlar la visibilidad del carrusel!
   const [mostrarCarrusel, setMostrarCarrusel] = useState(true);
 
-  // ¡NUEVO useEffect para manejar el evento de scroll!
+  // Estados para nuestros filtros
+  const [busqueda, setBusqueda] = useState(""); // Para la barra de búsqueda de texto
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(''); // Para el dropdown de Categorías
+  const [cineSeleccionado, setCineSeleccionado] = useState(''); // Para el dropdown de Cines
+  
+
+  // --- EFECTOS ---
+  // useEffect para el scroll del carrusel (se mantiene igual)
   useEffect(() => {
     const handleScroll = () => {
-      // Si el usuario baja más de 50px, oculta el carrusel. Si no, lo muestra.
       if (window.scrollY > 50) {
         setMostrarCarrusel(false);
       } else {
         setMostrarCarrusel(true);
       }
     };
-
-    // Añadimos el "escuchador" de eventos de scroll
     window.addEventListener('scroll', handleScroll);
-
-    // ¡Importante! Limpiamos el "escuchador" cuando el componente se "desmonta"
-    // para evitar problemas de memoria.
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []); // El array vacío asegura que esto se configure solo una vez
-
-  // El useEffect para obtener las películas se mantiene igual...
-  useEffect(() => {
-    // ... tu código para fetch de la API ...
   }, []);
 
-  // El cálculo de películas filtradas y ubicaciones únicas se mantiene igual...
-  const ubicacionesUnicas = [...new Set(peliculas.map(p => p.Ubication))];
+  // useEffect para obtener las películas de la API (ahora implementado)
+  useEffect(() => {
+    const obtenerPeliculas = async () => {
+      try {
+        const url = "https://movie.azurewebsites.net/api/cartelera?title=&ubication=";
+        const respuesta = await fetch(url);
+        const data = await respuesta.json();
+
+        console.log("1. Datos recibidos de la API:", data);
+        setPeliculas(data);
+      } catch (error) {
+        console.error("Error al obtener las películas:", error);
+      } finally {
+        setEstaCargando(false);
+      }
+    };
+    obtenerPeliculas();
+  }, []); // El array vacío [] asegura que se ejecute solo una vez
+
+
+  // --- LÓGICA DE FILTRADO Y PROCESAMIENTO DE DATOS ---
+  // Usamos useMemo para que estas listas solo se recalculen si la lista de películas cambia
+  const { categoriasUnicas, cinesUnicos } = useMemo(() => {
+    const categorias = [...new Set(peliculas.map(p => 
+        p.Type.trim().charAt(0).toUpperCase() + p.Type.trim().slice(1).toLowerCase()
+    ))].sort();
+
+    const cines = [...new Set(peliculas.map(p => 
+        mapaDeCines[p.Ubication.trim().toUpperCase()] || p.Ubication.trim()
+    ))].sort();
+
+    return { categoriasUnicas: categorias, cinesUnicos: cines };
+  }, [peliculas]);
+
+  // Filtra la lista de películas para mostrar, combinando todos los filtros
   const peliculasFiltradas = peliculas.filter(pelicula => {
-    // ... tu lógica de filtrado ...
+    const categoriaNormalizada = pelicula.Type.trim().charAt(0).toUpperCase() + pelicula.Type.trim().slice(1).toLowerCase();
+    const cineNormalizado = mapaDeCines[pelicula.Ubication.trim().toUpperCase()] || pelicula.Ubication.trim();
+
+    // Comprobaciones de cada filtro
+    const coincideBusqueda = pelicula.Title.toLowerCase().includes(busqueda.toLowerCase());
+    const coincideCategoria = categoriaSeleccionada === '' || categoriaNormalizada === categoriaSeleccionada;
+    const coincideCine = cineSeleccionado === '' || cineNormalizado === cineSeleccionado;
+
+    return coincideBusqueda && coincideCategoria && coincideCine;
   });
 
+
+  // --- RENDERIZADO ---
   return (
-    // Usamos un Fragment (<>) para no añadir un div innecesario
     <>
-      <Header />
+      <Header
+        // Pasamos todos los datos y funciones que el Header necesita para los filtros
+        categorias={categoriasUnicas}
+        cines={cinesUnicos}
+        categoriaSeleccionada={categoriaSeleccionada}
+        setCategoriaSeleccionada={setCategoriaSeleccionada}
+        cineSeleccionado={cineSeleccionado}
+        setCineSeleccionado={setCineSeleccionado}
+      />
       
-      {/* Modificamos el div del carrusel para añadir la clase 'oculto' dinámicamente */}
       <div className={`carrusel-wrapper ${!mostrarCarrusel ? 'oculto' : ''}`}>
         <Carrusel />
       </div>
 
       <main className="App">
-        {/* El H1 lo podemos mover a una sección más específica si queremos */}
         <h2>CARTELERA</h2>
-        <Filtros
+        <BarraBusqueda
           busqueda={busqueda}
           setBusqueda={setBusqueda}
-          ubicaciones={ubicacionesUnicas}
-          filtroUbicacion={filtroUbicacion}
-          setFiltroUbicacion={setFiltroUbicacion}
         />
 
         {estaCargando ? (
