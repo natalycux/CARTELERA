@@ -105,8 +105,31 @@
 
 /* =============================================== */
 /* ESTA ES LA REGLA QUE ARREGLA TU PROBLEMA */
+/* Colocar el texto negro en las opciones del select */
 /* =============================================== */
 .location-selectors select option {
   color: black;
   background-color: white;
+}
+
+
+/* =============================================== */
+/* ESTILOS PARA LOS NUEVOS ÍCONOS DE REDES SOCIALES */
+/* =============================================== */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem; /* Espacio entre íconos */
+}
+
+.social-icons a {
+  color: white; /* Color del ícono */
+  font-size: 1.2rem; /* Tamaño del ícono */
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Efecto al pasar el mouse por encima */
+.social-icons a:hover {
+  color: #5dadec; /* El mismo azul claro que 'Preventas' */
+  transform: scale(1.1); /* Hace que el ícono crezca un poco */
 }

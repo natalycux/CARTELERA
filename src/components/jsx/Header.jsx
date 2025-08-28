@@ -1,10 +1,12 @@
-// src/components/jsx/Header.jsx (Versión final y conectada)
+// src/components/jsx/Header.jsx (Versión final con filtros e íconos)
 
 import React, { useState } from 'react';
 import '../css/Header.css'; // Asegúrate que la ruta a tu CSS sea correcta
 
-// ¡ESTE ES EL CAMBIO MÁS IMPORTANTE!
-// Ahora el Header está "escuchando" toda la información que App.jsx le pasa.
+// --- ICONOS ---
+import { FaFacebook, FaInstagram, FaYoutube, FaMobileAlt } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+
 const Header = ({
   categorias,
   cines,
@@ -14,7 +16,6 @@ const Header = ({
   setCineSeleccionado
 }) => {
   
-  // La lógica para el menú desplegable de "Menú" se puede quedar si la quieres
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   return (
@@ -24,28 +25,21 @@ const Header = ({
           <a href="/">cinépolis</a>
         </div>
 
-        {/* ESTA ES LA SECCIÓN QUE HEMOS HECHO DINÁMICA */}
         <div className="location-selectors">
-          
-          {/* SELECTOR DE CATEGORÍA */}
           <select 
             value={categoriaSeleccionada} 
             onChange={(e) => setCategoriaSeleccionada(e.target.value)}
           >
             <option value="">Todas las Categorías</option>
-            {/* Construimos la lista de opciones dinámicamente */}
             {categorias.map(categoria => (
               <option key={categoria} value={categoria}>{categoria}</option>
             ))}
           </select>
-
-          {/* SELECTOR DE CINE */}
           <select 
             value={cineSeleccionado} 
             onChange={(e) => setCineSeleccionado(e.target.value)}
           >
             <option value="">Todos los Cines</option>
-            {/* Construimos la lista de opciones dinámicamente */}
             {cines.map(cine => (
               <option key={cine} value={cine}>{cine}</option>
             ))}
@@ -62,8 +56,13 @@ const Header = ({
           </a>
           <a href="#" className="preventas">Preventas</a>
         </nav>
+        
         <div className="social-icons">
-          <span>F</span> <span>X</span> <span>IG</span> <span>YT</span> <span>APP</span>
+          <a href="https://www.facebook.com/cinepolis" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+          <a href="https://twitter.com/cinepolis" target="_blank" rel="noopener noreferrer"><FaXTwitter /></a>
+          <a href="https://www.instagram.com/cinepolismx" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+          <a href="https://www.youtube.com/user/CinepolisOnline" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
+          <a href="#"><FaMobileAlt /></a>
         </div>
       </div>
 
