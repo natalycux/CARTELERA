@@ -1,15 +1,15 @@
-// src/components/Filtros.jsx
-import React from 'react';
-import '../css/BarraBusqueda.css';
+// src/components/jsx/BarraBusqueda.jsx (CORREGIDO)
 
-// Recibe los valores actuales y las funciones para cambiarlos desde App.jsx
+import React from 'react';
+import '../css/BarraBusqueda.css'; // Asegúrate de que esta importación esté correcta
+
 const BarraBusqueda = ({ busqueda, setBusqueda }) => {
   return (
-    <div className="area-filtros"> {/* Puedes mantener la clase CSS si quieres */}
+    <div className="barra-busqueda-container">
       <input
         type="text"
+        className="barra-busqueda-input"
         placeholder="Buscar por título..."
-        className="filtro-busqueda"
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
       />
