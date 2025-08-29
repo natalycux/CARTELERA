@@ -1,135 +1,109 @@
-/* src/components/css/Header.css (Versión completa y corregida) */
+/* src/components/css/Header.css */
 
+/* Contenedor principal del header */
 .site-header {
-  background-color: #0d2146; /* Color azul oscuro de Cinépolis */
-  color: white;
-  padding: 0.5rem 2rem;
-  
-  /* ¡La clave para el header fijo! */
-  position: sticky;
-  top: 0;
-  z-index: 1000; /* Asegura que esté por encima de todo lo demás */
-  
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: 'Open Sans', sans-serif;
 }
 
-.header-top, .header-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Barra de navegación principal (azul) */
+.main-navbar {
+  background-color: #0d2c54; /* Color azul oscuro de Cinépolis */
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.header-top {
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.logo a {
+.logo-text {
+  font-weight: bold;
   font-size: 2rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: white;
+  color: #ffffff !important; /* Aseguramos que el color sea blanco */
 }
 
-.location-selectors select, .ver-cartelera-btn {
-  background-color: transparent;
-  color: white;
-  border: 1px solid #fff;
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
+/* Estilo para los menús desplegables (selectores) */
+.location-selector {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
   border-radius: 4px;
+  padding: 8px 12px;
+  color: #333;
+  width: auto; /* Ancho automático */
+  min-width: 180px; /* Ancho mínimo para que no se vean tan pequeños */
 }
 
-.location-selectors select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-  background-repeat: no-repeat;
-  background-position: right .7em top 50%, 0 0;
-  background-size: .65em auto, 100%;
-}
-
+/* Botón "VER CARTELERA" */
 .ver-cartelera-btn {
-  background-color: #ffc107; /* Amarillo */
-  color: #0d2146;
+  background-color: #ffc107; /* Color amarillo */
+  color: #0d2c54; /* Texto azul oscuro */
   font-weight: bold;
-  cursor: pointer;
   border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
 }
 
+.ver-cartelera-btn:hover {
+  background-color: #e0a800; /* Amarillo un poco más oscuro al pasar el mouse */
+  color: #0d2c54;
+}
+
+/* Barra inferior (negra) */
 .header-bottom {
-  padding-top: 0.5rem;
+  background-color: #1e1e1e;
+  padding: 8px 0;
+  color: #ffffff;
 }
 
 .main-nav a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
-  margin-right: 1.5rem;
+  margin-right: 20px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: #ffc107; /* Color amarillo al pasar el mouse */
 }
 
 .main-nav a.preventas {
-  color: #5dadec; /* Azul claro para preventas */
+  color: #ffc107; /* Color amarillo para "Preventas" */
   font-weight: bold;
 }
 
-.social-icons span {
-  margin-left: 1rem;
-  cursor: pointer;
-}
-
-
-.menu-desplegable {
-  position: absolute;
-  top: 100%; 
-  left: 0;
-  width: 100%;
-  z-index: 999;
-  /* He completado los estilos que te di antes para este menú */
-  background-color: #1a1a1a;
-  border-top: 1px solid #333;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  padding: 2rem;
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-}
-
-.menu-desplegable.abierto {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* =============================================== */
-/* ESTA ES LA REGLA QUE ARREGLA TU PROBLEMA */
-/* Colocar el texto negro en las opciones del select */
-/* =============================================== */
-.location-selectors select option {
-  color: black;
-  background-color: white;
-}
-
-
-/* =============================================== */
-/* ESTILOS PARA LOS NUEVOS ÍCONOS DE REDES SOCIALES */
-/* =============================================== */
-.social-icons {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem; /* Espacio entre íconos */
-}
-
 .social-icons a {
-  color: white; /* Color del ícono */
-  font-size: 1.2rem; /* Tamaño del ícono */
-  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  color: #ffffff;
+  margin-left: 15px;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
 }
 
-/* Efecto al pasar el mouse por encima */
 .social-icons a:hover {
-  color: #5dadec; /* El mismo azul claro que 'Preventas' */
-  transform: scale(1.1); /* Hace que el ícono crezca un poco */
+  color: #ffc107;
+}
+
+/* --- ESTILOS RESPONSIVOS --- */
+@media (max-width: 991px) {
+  /* En pantallas pequeñas (cuando aparece el menú hamburguesa) */
+  .main-navbar .navbar-collapse {
+    padding: 20px 0;
+  }
+  
+  .location-selector {
+    width: 100%; /* Ocupa todo el ancho */
+    margin-bottom: 10px; /* Espacio entre los selectores */
+    margin-right: 0 !important;
+  }
+
+  .ver-cartelera-btn {
+    width: 100%; /* Ocupa todo el ancho */
+    margin-top: 10px;
+  }
+
+  /* Ocultar iconos sociales en pantallas muy pequeñas si es necesario */
+  .header-bottom {
+    font-size: 0.9rem;
+  }
+  .social-icons {
+    display: none; /* Opcional: Oculta los iconos sociales en móvil para más espacio */
+  }
 }

@@ -1,8 +1,5 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  padding-top: 125px; /* Esto ahora sí funcionará para dejar espacio al header fijo */
 }
 
 .logo {
@@ -45,13 +42,13 @@
 /* src/App.css (añadir al final) */
 
 /* El .App ahora es el 'main' de nuestro contenido */
-.App {
-  max-width: 1200px;
-  margin: 0 auto;
+.contenido-principal {
+  max-width: 1200px; /* O el ancho que prefieras */
+  margin: 0 auto; /* Esto lo centra */
   padding: 1rem;
 }
 
-.App h2 {
+.contenido-principal h2 {
   text-align: center;
   font-size: 1.5rem;
   color: #5dadec;
