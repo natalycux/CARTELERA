@@ -43,20 +43,23 @@ body {
 
 /* El .App ahora es el 'main' de nuestro contenido */
 .contenido-principal {
-  max-width: 1200px; /* O el ancho que prefieras */
-  margin: 0 auto; /* Esto lo centra */
-  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* Aumentamos el padding superior a 4rem para "bajar" el contenido */
+  padding: 4rem 1rem 2rem; 
+  text-align: center;
 }
 
-.contenido-principal h2 {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #5dadec;
+/* Aprovechamos para refinar el estilo del título */
+.titulo-cartelera {
+  font-size: 1.5rem; /* Un poco más pequeño y sutil */
+  color: #333;
   margin-bottom: 2rem;
   text-transform: uppercase;
-  border-bottom: 2px solid #5dadec;
+  border-bottom: 2px solid #007bff; /* Un azul más vibrante */
   display: inline-block;
   padding-bottom: 0.5rem;
+  font-weight: 600; /* Un poco menos grueso que bold */
 }
 
 /* Contenedor para la animación del carrusel */
