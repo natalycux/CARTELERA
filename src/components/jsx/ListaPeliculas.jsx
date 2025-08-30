@@ -1,22 +1,38 @@
-// src/components/ListaPeliculas.jsx
+// src/components/jsx/ListaPeliculas.jsx
 
-import React from 'react';
-import TarjetaPelicula from './TarjetaPelicula';
-import '../css/ListaPeliculas.css'; // Crearemos este archivo para el grid
+import React, { useState } from 'react';
+import PeliculaCard from './PeliculaCard';
+import PeliculaModal from './PeliculaModal';
+import '../css/ListaPeliculas.css'; // Importamos el CSS para la cuadrícula
 
 const ListaPeliculas = ({ peliculas }) => {
-  // Si no hay películas, muestra un mensaje
-  if (peliculas.length === 0) {
-    return <p className="sin-resultados">No se encontraron películas con esos criterios.</p>;
-  }
+  const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
+
+  const handleAbrirModal = (pelicula) => {
+    setPeliculaSeleccionada(pelicula);
+  };
+
+  const handleCerrarModal = () => {
+    setPeliculaSeleccionada(null);
+  };
 
   return (
-    <div className="lista-peliculas">
-      {/* Usamos .map() para "mapear" cada objeto de película a un componente TarjetaPelicula */}
-      {peliculas.map((pelicula) => (
-        <TarjetaPelicula key={pelicula.imdbID} pelicula={pelicula} />
-      ))}
-    </div>
+    <>
+      <div className="lista-peliculas-grid">
+        {peliculas.map(pelicula => (
+          // El onClick ahora está en el div que envuelve la tarjeta
+          <div key={pelicula.imdbID} onClick={() => handleAbrirModal(pelicula)}>
+            <PeliculaCard pelicula={pelicula} />
+          </div>
+        ))}
+      </div>
+
+      <PeliculaModal
+        pelicula={peliculaSeleccionada}
+        mostrar={peliculaSeleccionada !== null}
+        alCerrar={handleCerrarModal}
+      />
+    </>
   );
 };
 

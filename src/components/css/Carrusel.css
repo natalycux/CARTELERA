@@ -1,31 +1,26 @@
-/* src/components/Carrusel.css */
+/* src/components/css/Carrusel.css */
 
-.carrusel-container {
-  /* La visibilidad y opacidad se controlarán desde App.jsx para la animación */
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out, max-height 0.6s ease-in-out;
-  overflow: hidden;
-  max-height: 500px; /* Altura inicial */
+.carousel-image {
+  /*
+    Esta es la parte más importante. Le decimos a la imagen que intente
+    cubrir todo el espacio disponible sin deformarse.
+  */
+  object-fit: cover; 
+  object-position: center; /* Nos aseguramos de que se centre la imagen */
 }
 
-/* Clases que añadiremos/quitaremos con React */
-.carrusel-container.oculto {
-  opacity: 0;
-  max-height: 0; /* La clave para que se colapse */
-  transform: translateY(-20px);
+/*
+  Para evitar que el carrusel cambie de tamaño bruscamente (Layout Shift)
+  le damos una altura máxima. En pantallas grandes será de 550px.
+*/
+.carousel .carousel-item {
+  max-height: 550px;
+  background-color: #000; /* Fondo negro por si una imagen no carga o es transparente */
 }
 
-.carrusel-imagen {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-/* Opcional: para mejorar los puntos de navegación de react-slick */
-.slick-dots li button:before {
-  font-size: 12px;
-  color: white;
-}
-
-.slick-dots li.slick-active button:before {
-  color: #ffc107;
+/* En pantallas más pequeñas, hacemos el carrusel un poco más bajo */
+@media (max-width: 768px) {
+  .carousel .carousel-item {
+    max-height: 350px;
+  }
 }

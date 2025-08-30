@@ -38,7 +38,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <p>Contenido del sitio 2025© Inversiones Cinematográficas de Guatemala®, S.A.</p>
-        <p>Desarrollado por IA Interactivell.</p>
+        <p>Desarrollado por Nataly Michell Cux Recinos 1890-22-18009.</p>
       </div>
     </footer>
   );

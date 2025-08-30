@@ -1,16 +1,8 @@
-/* src/components/ListaPeliculas.css */
+/* src/components/css/ListaPeliculas.css */
 
-.lista-peliculas {
+.lista-peliculas-grid {
   display: grid;
-  /* Crea columnas flexibles. Se ajustarán entre 250px y 1fr (lo que quepa) */
+  /* Crea columnas automáticas que tengan un mínimo de 250px */
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-}
-
-.sin-resultados {
-  color: white;
-  text-align: center;
-  font-size: 1.5rem;
-  padding: 3rem;
+  gap: 2rem; /* Espacio entre las tarjetas */
 }

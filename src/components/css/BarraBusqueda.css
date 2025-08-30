@@ -1,21 +1,32 @@
-/* src/components/Filtros.css */
-.area-filtros {
+/* src/components/css/BarraBusqueda.css (Con el estilo anterior que te gusta) */
+
+.barra-busqueda-container {
+  /* Centramos el contenedor de la barra */
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap; /* Para que sea responsivo en pantallas pequeñas */
+  margin-bottom: 3rem; /* Espacio debajo de la barra */
 }
 
-.filtro-busqueda, .filtro-select {
+.barra-busqueda-input {
+  /* Aplicamos los estilos de tu clase ".filtro-busqueda" */
+  width: 350px; /* Ancho de la barra de búsqueda */
   padding: 0.75rem;
   border: 1px solid #444;
   background-color: #2c2c3a;
   color: white;
-  border-radius: 5px;
+  border-radius: 5px; /* Bordes ligeramente redondeados */
   font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s; /* Transición suave */
 }
 
-.filtro-busqueda {
-  width: 300px;
+/* Estilo para el texto de ejemplo (placeholder) */
+.barra-busqueda-input::placeholder {
+  color: #a0a0a0;
+}
+
+/* Efecto al hacer clic en la barra */
+.barra-busqueda-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }

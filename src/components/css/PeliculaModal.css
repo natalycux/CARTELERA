@@ -1,0 +1,111 @@
+/* src/components/css/PeliculaModal.css */
+
+.modal-contenido {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 2rem;
+  position: relative;
+}
+
+.modal-cerrar-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #aaa;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-layout {
+  display: flex;
+  gap: 2rem;
+}
+
+.modal-poster img {
+  width: 250px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.modal-info {
+  flex: 1;
+}
+
+.modal-titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0d2c54;
+  margin-bottom: 0.5rem;
+}
+
+.modal-tipo {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.sinopsis-titulo {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.modal-descripcion {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* --- Estilos Responsivos para el Modal --- */
+@media (max-width: 768px) {
+  .modal-layout {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .modal-poster img {
+    width: 200px;
+  }
+
+  .sinopsis-titulo {
+    display: block;
+  }
+}
+
+/* src/components/css/PeliculaModal.css (añadir al final) */
+
+/* Renombramos la clase para evitar conflictos y la estilizamos */
+.modal-meta {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem; /* Reducimos el margen */
+}
+
+.modal-ubicacion {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.ubicacion-icono-modal {
+  margin-right: 0.5rem;
+  color: #007bff; /* Azul primario */
+}
+
+/*
+  Esta es la regla que FUERZA el espacio entre "Disponible en:"
+  y el nombre del cine, añadiendo un margen a la izquierda.
+*/
+.modal-ubicacion-nombre {
+  margin-left: 0.5rem; /* 0.5rem son aprox. 8px */
+}

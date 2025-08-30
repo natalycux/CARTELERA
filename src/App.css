@@ -1,8 +1,5 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  padding-top: 125px; /* Esto ahora sí funcionará para dejar espacio al header fijo */
 }
 
 .logo {
@@ -45,21 +42,24 @@
 /* src/App.css (añadir al final) */
 
 /* El .App ahora es el 'main' de nuestro contenido */
-.App {
+.contenido-principal {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  /* Aumentamos el padding superior a 4rem para "bajar" el contenido */
+  padding: 4rem 1rem 2rem; 
+  text-align: center;
 }
 
-.App h2 {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #5dadec;
+/* Aprovechamos para refinar el estilo del título */
+.titulo-cartelera {
+  font-size: 1.5rem; /* Un poco más pequeño y sutil */
+  color: #333;
   margin-bottom: 2rem;
   text-transform: uppercase;
-  border-bottom: 2px solid #5dadec;
+  border-bottom: 2px solid #007bff; /* Un azul más vibrante */
   display: inline-block;
   padding-bottom: 0.5rem;
+  font-weight: 600; /* Un poco menos grueso que bold */
 }
 
 /* Contenedor para la animación del carrusel */
